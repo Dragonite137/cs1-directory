@@ -1,0 +1,126 @@
+module nat
+
+import bool
+import pair
+
+-- Here's our data type definition.
+
+||| A data type to represent the natural numbers.  We use a lower case
+||| "n" in the name to distinguish our nat type from Idris's Nat type
+
+data nat = O | S nat
+
+||| returns true if the argument is (represents) zero, otherwise false
+isZero: nat -> bool
+isZero O = true
+isZero _ = false
+
+||| returns the successor of any given nat
+succ: nat -> nat
+succ n = S n
+
+
+||| returns the predecessor of any given nat
+pred: nat -> nat
+pred O = O
+pred (S n) = n
+
+||| return true if the argument is even otherwise false
+evenb: nat -> bool
+evenb O = true
+evenb (S O) = false
+evenb (S (S n)) = evenb n
+
+oddb: nat -> bool
+oddb n = not (evenb n)
+
+||| given a pair of natural numbers, return its sum
+addp: pair nat nat -> nat
+addp (mkPair O m) = m
+addp (mkPair (S n) m) = S (addp (mkPair n m))
+
+|||given two natural numbers, return their sum
+add: nat -> nat -> nat
+add O m = m
+add (S n) m = S (add n m)
+
+addTwo: nat -> nat
+addTwo = add (S (S O))
+
+result: nat
+result = addTwo (S (S (S O)))
+
+pf: nat -> nat
+pf = (add (S (S O)))
+
+||| given a pair of natural numbers, return its product
+--This function is defined by the sum of (the product of n and m) and m. 
+multp: pair nat nat -> nat
+multp (mkPair O m) = O
+multp (mkPair (S n) m) = addp (mkPair (multp (mkPair n m)) m)
+
+mult: nat -> nat -> nat
+mult O m = O
+mult (S n) m = add ((mult n m) m)
+
+|||factorial function
+--This is defined recursively by the multiplication of (S n) and n
+--factorial, yielding (S n) factorial
+factp: nat -> nat
+factp O = (S O)
+factp (S n) = multp (mkPair (S n) (factp n))
+
+|||a function that defines the nth fibonacci number
+fib: nat -> nat
+fib O = O
+fib (S O) = (S O)
+fib (S (S n)) = addp (mkPair (fib (S n)) (fib n))
+
+|||Given a pair of natural numbers, return their difference
+--Only works for when n >= m, otherwise it returns O
+subtr: pair nat nat -> nat
+subtr (mkPair O n) = O
+subtr (mkPair n O) = n
+subtr (mkPair (S n) (S m)) = subtr (mkPair n m)
+
+subt: nat -> nat -> nat
+subt O m = O
+subt n O = n
+subt (S n) (S m) = subt n m
+|||the exponential function
+exp: pair nat nat -> nat
+exp (mkPair O n) = O
+exp (mkPair n O) = (S O)
+exp (mkPair m (S n)) = multp (mkPair (exp (mkPair m n)) m)
+
+|||Given a pair of natural numbers, (a,b), return true 
+|||if a <= b otherwise return false
+lep: pair nat nat -> bool
+lep (mkPair O m) = true
+lep (mkPair (S n) O) = false
+lep (mkPair (S n) (S m)) = lep (mkPair n m)
+
+|||Given a pair of natural numbers, (a,b), return true
+|||if a is equal to b, otherwise false
+eqp: pair nat nat -> bool
+eqp (mkPair O O) = true
+eqp (mkPair (S O) O) = false
+eqp (mkPair O (S O)) = false
+eqp (mkPair (S n) (S m)) = eqp (mkPair n m)
+
+|||Given a pair of natural numbers, (a,b), return true
+|||if a is greater than b, otherwise false
+gtp: pair nat nat -> bool
+gtp n = not (lep n) 
+
+|||Given a pair of natural numbers, (a, b), return true if a is greater than or equal to b, otherwise return false
+gep: pair nat nat -> bool
+gep (mkPair O O) = true
+gep (mkPair (S O) O) = true
+gep (mkPair O (S O)) = false
+gep (mkPair (S n) (S m)) = gep (mkPair n m)
+
+|||Given a pair of natural numbers, (a, b), return true if a is less than b
+ltp: pair nat nat -> bool
+ltp n = not (gep n)
+

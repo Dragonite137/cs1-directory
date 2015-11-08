@@ -1,0 +1,194 @@
+module natTest
+
+import nat
+import nat.old 
+import pair
+import bool
+
+--zero
+z: nat
+z = O
+
+--one
+o: nat
+o = S O
+
+--two
+t: nat
+t = (S (S O))
+
+--three 
+r: nat
+r = (S t)
+
+--four
+g: nat
+g = S r
+
+--five
+w: nat
+w = S (S r)
+
+--expecting true
+zO: bool
+zO = isZero O
+
+--expecting false
+z1: bool
+z1 = isZero r
+
+--expecting (S O)
+y: nat
+y = succ O
+
+--expecting O
+y1: nat
+y1 = pred (S O)
+
+--expecting true
+a: bool 
+a = evenb O
+
+--expecting false
+b: bool
+b = evenb (S O)
+
+--expecting true
+c: bool
+c = evenb (S (S O))
+
+--expecting false
+d: bool
+d = evenb r
+
+--expecting true
+e: bool
+e = evenb (S r)
+
+--expecting O
+addTest1: nat
+addTest1 = addp (mkPair O O)
+
+--expecting (S (S O))
+addTest2: nat
+addTest2 = addp (mkPair O (S (S O)))
+
+--expecting (S O)
+addTest3: nat
+addTest3 = addp (mkPair (S O) O)
+
+--expecting (S (S (S (S (S O)))))
+addTest4: nat
+addTest4 = addp (mkPair (S (S O)) (S (S (S O))))
+
+--expecting O
+multtest1: nat
+multtest1 = multp (mkPair O (S (S O)))
+
+--expecting (S (S (S (S (S (S (S (S (S (S (S (S O))))))))))))
+multtest2: nat
+multtest2 = multp (mkPair (S (S (S O))) (S (S (S (S O)))))
+
+--expecting (S O)
+facttest1: nat
+facttest1 = factp O
+
+--expecting (S (S (S (S (S (S O))))))
+facttest2: nat
+facttest2 = factp (S (S (S O)))
+
+--expecting O
+fibtest1: nat
+fibtest1 = fib O
+
+--expecting (S O)
+fibtest2: nat
+fibtest2 = fib (S O)
+
+--expecting (S (S (S (S (S (S (S (S O)))))
+fibtest3: nat
+fibtest3 = fib (S (S (S (S (S (S O))))))
+
+--expecting O
+exptest1: nat
+exptest1 = exp (mkPair O (S O))
+
+--expecting (S O)
+exptest2: nat
+exptest2 = exp (mkPair (S (S O)) O)
+
+--expecting (S (S (S (S (S (S (S (S O))))))))
+exptest3: nat
+exptest3 = exp (mkPair (S (S O)) (S (S (S O))))
+
+--expecting O
+subtest1: nat
+subtest1 = subtr (mkPair O (S O))
+
+--expecting (S (S O))
+subtest2: nat
+subtest2 = subtr (mkPair (S (S O)) O)
+
+--expecting (S (S (S O)))
+subtest3: nat
+subtest3 = subtr (mkPair (S (S (S (S (S O))))) (S (S O)))
+
+--expecting true
+letest1: bool
+letest1 = lep (mkPair O O)
+
+--expecting true
+letest2: bool
+letest2 = lep (mkPair O (S (S O)))
+
+--expecting false
+letest3: bool
+letest3 = lep (mkPair (S (S O)) O)
+
+--expecting true
+eqtest1: bool
+eqtest1 = eqp (mkPair (S (S O)) (S (S O)))
+
+--expecting false
+eqtest2: bool
+eqtest2 = eqp (mkPair (S (S O)) (S O))
+
+--expecting false
+eqtest3: bool
+eqtest3 = eqp (mkPair (S O) (S (S O)))
+
+--expecting true
+gttest1: bool
+gttest1 = gtp (mkPair (S (S O)) (S O))
+
+--expecting false
+gttest2: bool
+gttest2 = gtp (mkPair (S (S O)) (S (S O)))
+
+--expecting false
+gttest3: bool
+gttest3 = gtp (mkPair O (S O))
+
+--expecting true
+getest1: bool
+getest1 = gep (mkPair (S (S O)) (S O))
+
+--expecting true
+getest2: bool
+getest2 = gep (mkPair (S (S O)) (S (S O)))
+
+--expecting false
+getest3: bool
+getest3 = gep (mkPair O (S O))
+
+--expecting false
+lttest1: bool
+lttest1 = ltp (mkPair (S O) O)
+
+--expecting false
+lttest2: bool
+lttest2 = ltp (mkPair (S O) (S O))
+
+--expecting true
+lttest3: bool
+lttest3 = ltp (mkPair (S O) (S (S O)))

@@ -1,0 +1,154 @@
+module boolTest
+
+import bool
+import pair
+
+b1: bool
+b1 = true
+
+b2: bool
+b2 = true
+
+b3: bool
+b3 = false
+
+b4: bool
+b4 = (not true)
+
+b5: bool
+b5 = (not b1)
+
+b6: bool
+b6 = not (not b5)
+
+--expecting true
+idtest1: bool
+idtest1 = id_bool (true)
+
+--expecting false
+idtest2: bool
+idtest2 = id_bool (false)
+
+--expecting false
+cftest1: bool
+cftest1 = constFalse (true)
+
+--expecting false
+cftest2: bool
+cftest2 = constFalse (false)
+
+--expecting true
+cttest1: bool
+cttest1 = constTrue (true)
+
+--expecting true
+cttest2: bool
+cttest2 = constTrue (false)
+
+--expecting false
+nottest1: bool
+nottest1 = not (true)
+
+--expecting true
+nottest2: bool
+nottest2 = not (false)
+
+--expecting true
+andtest1: bool
+andtest1 = andp (mkPair true true)
+
+--expecting false
+andtest2: bool
+andtest2 = andp (mkPair false true)
+
+--expecting false
+ortest1: bool
+ortest1 = orp (mkPair false false)
+
+--expecting true
+ortest2: bool
+ortest2 = orp (mkPair false true)
+
+--expecting false
+nandtest1: bool
+nandtest1 = nandp (mkPair true true)
+
+--expecting true
+nandtest2: bool
+nandtest2 = nandp (mkPair false true)
+
+--expecting true
+xortest1: bool
+xortest1 = xorp (mkPair true false)
+
+--expecting true
+xortest2: bool
+xortest2 = xorp (mkPair false true)
+
+--expecting false
+xortest3: bool
+xortest3 = xorp (mkPair true true)
+
+--expecting true
+pand_t_t: bool
+pand_t_t = pand true true
+
+--expecting false
+pand_t_f: bool
+pand_t_f = pand true false
+
+--expecting false
+pand_f_t: bool
+pand_f_t = pand false true
+
+--expecting false
+pand_f_f: bool
+pand_f_f = pand false false
+
+--expecting true
+por_t_t: bool
+por_t_t = por true true
+
+--expecting true
+por_t_f: bool
+por_t_f = por true false
+
+--expecting true
+por_f_t: bool
+por_f_t = por false true
+
+--expecting false
+por_f_f: bool
+por_f_f = por false false
+
+--expecting false
+pxor_t_t: bool
+pxor_t_t = false
+
+--expecting true
+pxor_t_f: bool
+pxor_t_f = true
+
+--expecting true
+pxor_f_t: bool
+pxor_f_t = true
+
+--expecting false
+pxor_f_f: bool
+pxor_f_f = false
+
+--expecting false
+pnand_t_t: bool
+pnand_t_t = false
+
+--expecting true
+pnand_t_f: bool
+pnand_t_f = true
+
+--expecting true
+pnand_f_t: bool
+pnand_f_t = true
+
+--expecting true
+pnand_f_f: bool
+pnand_f_f = true
