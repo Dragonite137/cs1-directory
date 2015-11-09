@@ -10,6 +10,6 @@ def hs(n):
                 n = 3*n + 1
         if (n == 1):
             print(n)
-            print(length)
+            print(length + 1) 
     else:
         print("Enter a positive integer")
